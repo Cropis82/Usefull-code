@@ -1,0 +1,25 @@
+<label>Message:</label><br>
+<input type="text" id="message" placeholder="Enter your message"><br><br>
+<label>Password:</label><br>
+<input type="password" id="password" placeholder="Enter a password"><br><br>
+
+<button onclick="encryptMessage()">Encrypt</button>
+
+<h3>Encrypted Output:</h3>
+<textarea id="output" rows="4" cols="50" readonly></textarea>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script>
+    function encryptMessage() {
+        const msg = document.getElementById('message').value;
+        const pass = document.getElementById('password').value;
+        
+        if(!msg || !pass) {
+            alert("Please enter both message and password!");
+            return;
+        }
+
+        const encrypted = CryptoJS.AES.encrypt(msg, pass).toString();
+        document.getElementById('output').value = encrypted;
+    }
+</script>
