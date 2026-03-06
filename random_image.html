@@ -1,0 +1,10 @@
+<img id="randomImage" src="" alt="Random Image">
+
+<script>
+    function loadRandomImage() {
+        const randomUrl = "https://picsum.photos/1920/1080?random=" + Math.random();
+        document.getElementById("randomImage").src = randomUrl;
+    }
+    
+    loadRandomImage();
+</script>
