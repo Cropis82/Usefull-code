@@ -39,3 +39,7 @@ async def websocket_endpoint(websocket: WebSocket):
             
     except WebSocketDisconnect:
         manager.disconnect(websocket)
+
+#uvicorn WSmain:app --reload
+#assicurarsi di avere installato fastapi, uvicorn e tinydb
+#assicurarsi che la porta 8000 sia pubblica
