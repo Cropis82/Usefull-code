@@ -1,0 +1,34 @@
+<div id="messages"></div>
+
+<input type="text" id="messageText" placeholder="Scrivi un messaggio..." autocomplete="off">
+<button onclick="sendMessage()">Invia</button>
+
+<script>
+    const ws = new WebSocket("wss://refactored-space-trout-q7pp7qqjpvx439476-8000.app.github.dev/ws");
+    const messagesDiv = document.getElementById("messages");
+    const inputField = document.getElementById("messageText");
+
+    ws.onmessage = function (event) {
+        const messageElement = document.createElement("div");
+        messageElement.classList.add("message");
+        messageElement.textContent = event.data;
+        messagesDiv.appendChild(messageElement);
+
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    };
+
+    function sendMessage() {
+        const text = inputField.value.trim();
+        if (text !== "") {
+            ws.send(text);
+            inputField.value = "";
+        }
+    }
+
+    inputField.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            sendMessage();
+        }
+    });
+</script>
